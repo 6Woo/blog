@@ -1,6 +1,6 @@
 ---
 title: "12개 커밋으로 만든 웹소켓 채팅을 접고 중계 구조로 바꾼 이유"
-folder: "만든 것들"
+folder: "만든 것들/채팅 앱"
 mood: fight
 tags: [채팅앱, 설계, 의사결정, 에이전트]
 candidate: drop

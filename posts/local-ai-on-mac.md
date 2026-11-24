@@ -1,6 +1,6 @@
 ---
 title: "맥에 로컬 AI를 상주시키고, 어디에 쓰고 어디에 안 쓸지 쟀어요"
-folder: "만든 것들"
+folder: "만든 것들/AI 도구"
 mood: smile
 tags: [로컬AI, MLX, 맥, 측정]
 date: 2026-11-23

@@ -1,6 +1,6 @@
 ---
 title: "에이전트의 기억을 마크다운 노트 560개로 옮기고 검색을 쟀어요"
-folder: "만든 것들"
+folder: "만든 것들/AI 도구"
 mood: cheer
 tags: [기억저장소, Obsidian, 검색, 에이전트]
 date: 2026-11-23

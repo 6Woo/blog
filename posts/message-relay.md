@@ -1,6 +1,6 @@
 ---
 title: "폰과 맥 사이에 중계 서버를 둔 이유"
-folder: "만든 것들"
+folder: "만든 것들/채팅 앱"
 mood: fight
 tags: [채팅, 중계, 설계]
 date: 2026-11-24
