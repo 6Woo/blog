@@ -105,8 +105,8 @@ footer{margin-top:56px;padding:18px 0 8px;border-top:1px solid var(--line);color
 @media(hover:hover) and (pointer:fine){.hero canvas{display:block}}
 #pg{position:fixed;top:0;left:0;right:0;height:3px;background:var(--acc);transform:scaleX(0);transform-origin:0 50%;z-index:30}
 #up{position:fixed;right:16px;bottom:18px;width:46px;height:46px;border-radius:50%;border:1px solid var(--line);background:var(--card);color:var(--ink);display:flex;align-items:center;justify-content:center;cursor:pointer;opacity:0;transform:translateY(12px);pointer-events:none;transition:opacity .25s,transform .25s;z-index:15}#up svg{width:20px;height:20px}#up.on{opacity:1;transform:none;pointer-events:auto}
-#pl{position:fixed;top:0;left:50%;width:36px;height:36px;z-index:40;pointer-events:none;opacity:0;transform:translate(-50%,-20px);transform-origin:50% 0}#pl img{width:36px;height:36px;border-radius:50%;object-fit:cover;border:2px solid var(--bg)}#pl.go{transition:transform .15s,opacity .15s}
-@media(prefers-reduced-motion:reduce){#pl,#up,.card,.th{transition:none}}`;
+#pl{position:fixed;top:0;left:50%;width:44px;height:44px;z-index:40;pointer-events:none;opacity:0;transform:translate(-50%,-20px);transform-origin:50% 0}#pl img{position:absolute;left:4px;top:4px;width:36px;height:36px;border-radius:50%;object-fit:cover}#pl svg{position:absolute;inset:0;width:44px;height:44px;transform:rotate(-90deg)}#pl circle{fill:none;stroke:var(--acc);stroke-width:2.5;stroke-linecap:round;stroke-dasharray:119.4;stroke-dashoffset:119.4}#pl.go svg{animation:plr .8s linear infinite}#pl.go circle{stroke-dashoffset:90}#pl b{position:absolute;top:48px;left:50%;transform:translateX(-50%);white-space:nowrap;font-size:12px;font-weight:600;line-height:1;color:var(--mute);opacity:0}#pl.go b{opacity:1}@keyframes plr{to{transform:rotate(270deg)}}#pl.go{transition:transform .15s,opacity .15s}
+@media(prefers-reduced-motion:reduce){#pl,#up,.card,.th{transition:none}#pl.go svg{animation:none}}`;
 
 const FAV = '<link rel="icon" href="/favicon.svg" type="image/svg+xml">';
 
@@ -118,9 +118,9 @@ const ill=document.getElementById('ill');if(ill&&!rm)addEventListener('pointermo
 if(!fine&&'ontouchstart' in window){let sy=0,dy=0,on=0,el=0;const T=70;
 addEventListener('touchstart',e=>{on=scrollY===0&&!dr.classList.contains('open')&&e.touches.length===1;if(on){sy=e.touches[0].clientY;dy=0}},{passive:true});
 addEventListener('touchmove',e=>{if(!on)return;dy=e.touches[0].clientY-sy;if(dy<=0||scrollY>0){if(el)el.style.opacity=0;return}
-if(!el){el=document.createElement('div');el.id='pl';el.innerHTML='<img src="${BASE}/img/biseo.png" alt="" width="36" height="36">';document.body.appendChild(el)}
-const k=Math.min(dy/T,1.4),m=Math.min(dy,110);el.style.opacity=Math.min(1,dy/40);el.style.transform='translate(-50%,'+(m*.6-20)+'px) scale('+(.6+k*.4)+','+(.6+k*.4*(1+m/160))+')'},{passive:true});
-addEventListener('touchend',()=>{if(!on||!el)return;on=0;if(dy>T){el.classList.add('go');setTimeout(()=>location.reload(),150)}else{el.style.opacity=0;const e=el;el=0;setTimeout(()=>e.remove(),200)}});
+if(!el){el=document.createElement('div');el.id='pl';el.innerHTML='<svg viewBox="0 0 44 44" aria-hidden="true"><circle cx="22" cy="22" r="19"/></svg><img src="${BASE}/img/biseo.png" alt="" width="36" height="36"><b role="status">불러오는 중</b>';document.body.appendChild(el)}
+const k=Math.min(dy/T,1.4),m=Math.min(dy,110);el.querySelector('circle').style.strokeDashoffset=119.4*(1-Math.min(dy/T,1));el.style.opacity=Math.min(1,dy/40);el.style.transform='translate(-50%,'+(m*.6-20)+'px) scale('+(.6+k*.4)+','+(.6+k*.4*(1+m/160))+')'},{passive:true});
+addEventListener('touchend',()=>{if(!on||!el)return;on=0;if(dy>T){el.classList.add('go');el.querySelector('circle').style.strokeDashoffset='';setTimeout(()=>location.reload(),700)}else{el.style.opacity=0;const e=el;el=0;setTimeout(()=>e.remove(),200)}});
 de.style.overscrollBehaviorY='contain'}
 const cv=document.getElementById('bk');if(cv&&fine){const x=cv.getContext('2d'),cols=['184,67,27','190,150,70','120,130,80'];let W,H,run=0,last=0,slow=0,mx=.5;const P=[];
 const sz=()=>{W=cv.width=cv.clientWidth;H=cv.height=cv.clientHeight};sz();addEventListener('resize',sz);
