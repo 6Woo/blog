@@ -30,3 +30,7 @@ phone-chat-for-agents
 referrer-policy-origin-null
 team-intro-qa
 team-intro-security
+net-04-switching-vlan
+net-05-dns-dhcp-nat
+aws-04-ec2
+aws-05-storage
