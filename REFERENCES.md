@@ -19,5 +19,7 @@
 
 ## 글꼴 라이선스
 
-- Pretendard: SIL Open Font License 1.1 (소스: github.com/orioncactus/pretendard). 사용 글자만 잘라 `static/fonts/pretendard-subset.woff2` 로 직접 호스팅.
-- Gamja Flower (감자꽃): SIL Open Font License 1.1 (소스: github.com/google/fonts ofl/gamjaflower). KS X 1001 한글 2350자와 영문, 기호만 잘라 `static/fonts/gamja-subset.woff2` 로 직접 호스팅. 제목, 소제목, 폴더 이름, 인용구에만 쓴다.
+모두 SIL Open Font License 1.1, 직접 호스팅(외부 CDN 없음). KS X 1001 한글 2350자와 영문, 기호만 잘라 woff2 로 쓴다. 합계 약 230KB.
+
+- Gowun Dodum (고운돋움): 본문과 제목 전체. 소스 github.com/google/fonts ofl/gowundodum. `static/fonts/gowun-subset.woff2`
+- Hi Melody: 블로그 이름과 인용구에만. 소스 github.com/google/fonts ofl/himelody. `static/fonts/himelody-subset.woff2`
