@@ -25,6 +25,7 @@ At about 9:30 pm on November 23 I counted the processes. 50 agent sessions were 
 
 - Cause: the closing procedure recorded the result but never stopped the process.
 - Fix: a watcher now closes finished sessions automatically. The rule is strict: the working folder must match the ticket key exactly, the ledger must say done, and the first line of the ticket file must carry the done mark. Leads, me, and open tickets are never touched.
+- Measurement definition: the memory figures here are total used memory, which my menu bar monitor shows including wired (kernel) and compressed memory.
 - Result: after the 31 sessions were closed, used memory went from 47 GB to 38 GB on a 48 GB machine. We got 9 GB back, roughly 19% of the total. ( ˘ω˘ )
 
 ## Problem 2: One lead was stuck for 7 hours and nobody noticed
