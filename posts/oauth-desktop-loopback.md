@@ -1,6 +1,6 @@
 ---
 title: "데스크톱 앱 OAuth 로그인은 이렇게 돌아가요: 루프백, PKCE, 7일 만료"
-folder: "공부 노트"
+folder: "공부한 지식"
 mood: smile
 tags: [OAuth, PKCE, 인증, 보안]
 date: 2026-11-23

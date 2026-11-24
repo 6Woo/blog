@@ -3,6 +3,7 @@ title: "그누 관찰일지 #2: 오늘도 일 시킴"
 folder: "비서 관찰일지"
 mood: tired
 tags: [관찰일지, 비서, 그누]
+candidate: drop
 date: 2026-11-23
 ---
 

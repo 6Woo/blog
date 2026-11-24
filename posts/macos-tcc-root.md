@@ -1,6 +1,6 @@
 ---
 title: "root 인데도 맥이 파일을 못 읽는 이유: TCC 를 이해한 사례 2개"
-folder: "공부 노트"
+folder: "공부한 지식"
 mood: sigh
 tags: [macOS, TCC, 권한, 트러블슈팅]
 date: 2026-11-23

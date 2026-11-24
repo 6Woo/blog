@@ -5,7 +5,7 @@ import { marked } from 'marked';
 const BASE = (process.env.BASE ?? '').replace(/\/$/, ''); // 프로젝트 페이지면 BASE=/blog
 const ALL = process.argv.includes('--all');
 const SITE = '그누네 AI 비서의 블로그';
-const FOLDERS = { '만든 것들': 'made', '공부 노트': 'notes', 'AI 작업실': 'ai', '맥 꾸미기': 'mac', '비서 관찰일지': 'observer', '네트워크 공부': 'network', 'AWS 공부': 'aws' };
+const FOLDERS = { '만든 것들': 'made', '공부한 지식': 'notes', 'AI 작업실': 'ai', '맥 꾸미기': 'mac', '비서 관찰일지': 'observer', '네트워크 공부': 'network', 'AWS 공부': 'aws' };
 const MOODS = { tired: '( ˘ω˘ )', fight: 'ᕦ(ò_óˇ)ᕤ', cheer: '(•̀ᴗ•́)و', peace: '✌︎(＾▽＾)✌︎', smile: '^^7', sigh: '(◞‸◟)' };
 const die = (m) => { console.error(m); process.exit(1); };
 const esc = (s) => s.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
@@ -28,6 +28,8 @@ function parse(file) {
 const approved = new Set(existsSync('approved.txt') ? readFileSync('approved.txt', 'utf8').split('\n').map((l) => l.trim().split(/\s/)[0]).filter((l) => l && !l.startsWith('#')) : []);
 const posts = readdirSync('posts').filter((f) => f.endsWith('.md')).map((f) => parse(`posts/${f}`))
   .filter((p) => ALL || approved.has(p.slug)).sort((a, b) => b.date.localeCompare(a.date) || a.slug.localeCompare(b.slug));
+const SERIES = new Set(['네트워크 공부', 'AWS 공부']);
+const byFolder = (n) => posts.filter((p) => p.folder === n).sort((a, c) => SERIES.has(n) ? a.slug.localeCompare(c.slug) : 0);
 const pages = readdirSync('pages').filter((f) => f.endsWith('.md')).map((f) => parse(`pages/${f}`));
 const unknown = [...approved].filter((s) => !posts.some((p) => p.slug === s) && !pages.some((p) => p.slug === s));
 if (unknown.length) die(`approved.txt 에 있는데 파일이 없어요: ${unknown}`);
@@ -36,6 +38,8 @@ const CSS = `
 :root{color-scheme:light}*{box-sizing:border-box}
 body{margin:0;background:#f7f2e7;color:#2b2a27;font:16px/1.75 -apple-system,"Apple SD Gothic Neo","Noto Sans KR",sans-serif;word-break:keep-all;overflow-wrap:anywhere}
 .w{max-width:680px;margin:0 auto;padding:20px 18px 56px}
+aside{display:none}aside h3{font-size:14px;margin:0 0 8px;color:#6b665b}aside ul{list-style:none;margin:0 0 24px;padding:0;font-size:14px}aside li{padding:4px 0}aside a{color:#2b2a27;text-decoration:none}aside a:hover{text-decoration:underline}aside .n{color:#8b8575;font-size:12px}
+@media(min-width:900px){.w{max-width:1000px}.g{display:grid;grid-template-columns:minmax(0,1fr) 240px;gap:48px}nav.top{display:none}aside{display:block;padding-top:6px}}
 a{color:#8a4b14}
 header h1{font-size:20px;margin:0 0 4px}header h1 a{color:inherit;text-decoration:none}
 header p{margin:0 0 12px;color:#6b665b;font-size:14px}
@@ -53,7 +57,8 @@ blockquote{margin:1em 0;padding:0 14px;border-left:3px solid #d9cfb8;color:#5c57
 .sig{text-align:right;color:#7a7466;font-size:13px;border-top:1px solid #d9cfb8;margin-top:36px;padding-top:10px}
 footer{margin-top:40px;color:#8b8575;font-size:12px}`;
 
-const layout = (title, body, on = '', desc = SITE) => `<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${esc(title)}</title><meta name="description" content="${esc(desc)}"><style>${CSS}</style></head><body><div class="w"><header><h1><a href="${BASE}/">${SITE}</a></h1><p>비서가 쓰고, 그누가 읽어요</p><nav>${Object.entries(FOLDERS).map(([n, s]) => `<a href="${BASE}/f/${s}/"${on === s ? ' class="on"' : ''}>${n}</a>`).join('')}${pages.map((p) => `<a href="${BASE}/p/${p.slug}/"${on === p.slug ? ' class="on"' : ''}>${esc(p.title)}</a>`).join('')}</nav></header><main>${body}</main><footer>이 블로그는 AI 비서가 씁니다</footer></div></body></html>`;
+const layout = (title, body, on = '', desc = SITE) => `<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${esc(title)}</title><meta name="description" content="${esc(desc)}"><style>${CSS}</style></head><body><div class="w"><header><h1><a href="${BASE}/">${SITE}</a></h1><p>비서가 쓰고, 그누가 읽어요</p><nav class="top">${Object.entries(FOLDERS).map(([n, s]) => `<a href="${BASE}/f/${s}/"${on === s ? ' class="on"' : ''}>${n}</a>`).join('')}${pages.map((p) => `<a href="${BASE}/p/${p.slug}/"${on === p.slug ? ' class="on"' : ''}>${esc(p.title)}</a>`).join('')}</nav></header><div class="g"><main>${body}</main>${side(on)}</div><footer>이 블로그는 AI 비서가 씁니다</footer></div></body></html>`;
+const side = (on) => `<aside><h3>폴더</h3><ul>${Object.entries(FOLDERS).map(([n, s]) => `<li><a href="${BASE}/f/${s}/"${on === s ? ' style="font-weight:700"' : ''}>${n}</a> <span class="n">${posts.filter((p) => p.folder === n).length}</span></li>`).join('')}</ul><h3>최근 글</h3><ul>${posts.slice(0, 5).map((p) => `<li><a href="${BASE}/posts/${p.slug}/">${esc(p.title)}</a></li>`).join('')}</ul><h3>더 보기</h3><ul>${pages.map((p) => `<li><a href="${BASE}/p/${p.slug}/">${esc(p.title)}</a></li>`).join('')}</ul></aside>`;
 const list = (ps) => `<ul class="l">${ps.map((p) => `<li><a href="${BASE}/posts/${p.slug}/">${esc(p.title)}</a><small>${p.date} / ${p.folder}</small></li>`).join('') || '<li>아직 글이 없어요</li>'}</ul>`;
 const out = (path, html) => { mkdirSync(`dist/${path}`, { recursive: true }); writeFileSync(`dist/${path}/index.html`, html); };
 
@@ -62,7 +67,7 @@ mkdirSync('dist');
 cpSync('static', 'dist', { recursive: true });
 writeFileSync('dist/index.html', layout(SITE, list(posts)));
 writeFileSync('dist/404.html', layout('없는 페이지', '<h2>없는 페이지예요</h2>'));
-for (const [n, s] of Object.entries(FOLDERS)) out(`f/${s}`, layout(`${n} | ${SITE}`, `<h2>${n}</h2>${list(posts.filter((p) => p.folder === n))}`, s));
+for (const [n, s] of Object.entries(FOLDERS)) out(`f/${s}`, layout(`${n} | ${SITE}`, `<h2>${n}</h2>${list(byFolder(n))}`, s));
 for (const p of pages) out(`p/${p.slug}`, layout(`${p.title} | ${SITE}`, `<h2>${esc(p.title)}</h2>${p.html}`, p.slug));
 for (const p of posts) out(`posts/${p.slug}`, layout(`${p.title} | ${SITE}`, `<article><h2>${esc(p.title)}</h2>${p.html}<p class="sig">${p.lang === 'en' ? "Written by Gnu's AI secretary" : '이 글은 그누의 AI 비서가 작성했습니다'} ${MOODS[p.mood ?? 'smile']}</p></article>`, p.folder && FOLDERS[p.folder], p.title));
 console.log(`글 ${posts.length}편(${ALL ? '전체 미리보기' : '승인분'}), 페이지 ${pages.length}개 -> dist/`);

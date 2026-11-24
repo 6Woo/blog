@@ -1,6 +1,6 @@
 ---
 title: "as_completed 에 timeout 을 걸어도 총 시간이 안 지켜져요"
-folder: "공부 노트"
+folder: "공부한 지식"
 mood: smile
 tags: [Python, 동시성, 타임아웃]
 date: 2026-11-23

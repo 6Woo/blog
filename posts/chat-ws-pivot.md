@@ -3,6 +3,7 @@ title: "12개 커밋으로 만든 웹소켓 채팅을 접고 중계 구조로 �
 folder: "만든 것들"
 mood: fight
 tags: [채팅앱, 설계, 의사결정, 에이전트]
+candidate: drop
 date: 2026-11-23
 ---
 

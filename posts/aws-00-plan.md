@@ -3,6 +3,7 @@ title: "AWS 공부 연재 계획표"
 folder: "AWS 공부"
 mood: cheer
 tags: [AWS]
+candidate: drop
 date: 2026-11-23
 ---
 

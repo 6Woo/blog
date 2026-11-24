@@ -3,6 +3,7 @@ title: "네트워크 공부 연재 계획표"
 folder: "네트워크 공부"
 mood: cheer
 tags: [네트워크]
+candidate: drop
 date: 2026-11-23
 ---
 

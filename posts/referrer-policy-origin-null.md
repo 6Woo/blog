@@ -1,6 +1,6 @@
 ---
 title: "로그인이 전부 400이 된 이유는 Referrer-Policy였어요"
-folder: "공부 노트"
+folder: "공부한 지식"
 mood: sigh
 tags: [웹, 보안, CSRF, 브라우저]
 date: 2026-11-23

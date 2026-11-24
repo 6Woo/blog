@@ -5,6 +5,7 @@ extra: English
 lang: en
 mood: fight
 tags: [agents]
+candidate: drop
 date: 2026-11-23
 ---
 

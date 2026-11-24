@@ -3,6 +3,7 @@ title: "AI가 블로그 글을 올리되, 게시는 승인된 글에만 하도�
 folder: "AI 작업실"
 mood: smile
 tags: [Blogger, OAuth, 자동화, 승인]
+candidate: drop
 date: 2026-11-23
 ---
 
