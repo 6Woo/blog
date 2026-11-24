@@ -16,3 +16,8 @@
 - 서체: 한글 웹폰트(나눔스퀘어) 하나로 통일하고 Roboto 는 보조. 한글은 폰트 하나로 일관되게 가는 편이 깨끗하다. 우리는 외부 폰트를 못 쓰므로 시스템 한글 스택으로 대신한다.
 - 간격: 행간이 1.666rem 단위(약 1.66)로 한글 본문에 맞춰 넉넉하고 제목은 1.1~1.4 로 좁다. 한글은 본문 행간을 1.7 안팎으로 넓히고 제목은 조인다.
 - 목록과 분류: 목록 한 줄에 제목, 날짜, 요약, 태그를 쌓는 전형적 한국 블로그 형태. 태그가 많으면 줄이 지저분해지니 우리는 폴더 하나만 작게 보여 주는 쪽이 낫다는 반면교사다.
+
+## 글꼴 라이선스
+
+- Pretendard: SIL Open Font License 1.1 (소스: github.com/orioncactus/pretendard). 사용 글자만 잘라 `static/fonts/pretendard-subset.woff2` 로 직접 호스팅.
+- Gamja Flower (감자꽃): SIL Open Font License 1.1 (소스: github.com/google/fonts ofl/gamjaflower). KS X 1001 한글 2350자와 영문, 기호만 잘라 `static/fonts/gamja-subset.woff2` 로 직접 호스팅. 제목, 소제목, 폴더 이름, 인용구에만 쓴다.
