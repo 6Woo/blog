@@ -44,18 +44,24 @@ a{color:var(--acc)}
 header{border-bottom:1px solid var(--line);margin:0 -18px 26px;padding:18px 18px 0}
 .hd{max-width:1040px;margin:0 auto}
 header h1{margin:0;font-size:24px;font-weight:800;letter-spacing:-.03em;line-height:1.3}header h1 a{color:inherit;text-decoration:none}
-header p{margin:2px 0 0;font-size:13px;color:var(--mute)}
-nav{display:flex;flex-wrap:wrap;gap:2px 18px;margin:12px 0 0;padding-bottom:10px;font-size:14.5px}
+header p{display:none;margin:2px 0 0;font-size:13px;color:var(--mute)}
+nav{display:none;flex-wrap:wrap;gap:2px 18px;margin:8px 0 0;padding-bottom:10px;font-size:14.5px}header{padding-bottom:4px}
 nav a{color:var(--ink);text-decoration:none;padding:3px 0;border-bottom:2px solid transparent}nav a.on{font-weight:700;border-color:var(--acc)}nav a:hover{border-color:var(--line)}
-.sq{position:relative;margin:10px 0 12px}.sq input{width:100%;font:inherit;font-size:14px;padding:8px 10px;background:#fbf8ef;border:1px solid var(--line);border-radius:3px;color:var(--ink)}
+.sq{position:relative;margin:0 0 6px}.sq input{width:100%;font:inherit;font-size:14px;padding:8px 10px;background:#fbf8ef;border:1px solid var(--line);border-radius:3px;color:var(--ink)}
 #sr{position:absolute;z-index:5;left:0;right:0;top:100%;background:#fbf8ef;border:1px solid var(--line);list-style:none;margin:2px 0 0;padding:0;display:none;font-size:14px;line-height:1.5}
 #sr li a{display:block;padding:8px 10px;color:var(--ink);text-decoration:none;border-bottom:1px solid var(--line)}#sr li a:hover{background:var(--code)}
 .g{display:block}
-aside{margin-top:44px;padding-top:6px;border-top:2px solid var(--ink);font-size:14px;line-height:1.6}
+aside{position:fixed;z-index:20;top:0;bottom:0;left:0;width:min(84vw,320px);overflow-y:auto;background:var(--bg);padding:14px 20px 28px;font-size:15px;line-height:1.6;transform:translateX(-100%);visibility:hidden;transition:transform .22s ease,visibility 0s .22s;border-right:1px solid var(--line)}
+aside.open{transform:none;visibility:visible;transition:transform .22s ease}
+#bd{position:fixed;z-index:10;inset:0;background:rgba(38,35,31,.4);display:none}#bd.open{display:block}body.lock{overflow:hidden}
+.bar{display:flex;align-items:center;gap:6px;margin-left:-10px}
+.bt{width:44px;height:44px;border:0;background:none;color:var(--ink);cursor:pointer;display:flex;align-items:center;justify-content:center;flex:none}.bt svg{width:24px;height:24px}.bt:focus-visible,aside a:focus-visible{outline:2px solid var(--acc);outline-offset:-2px}
+.dh{display:flex;justify-content:space-between;align-items:center;margin:-6px -10px 6px 0;font-weight:800}
+aside li{display:flex;justify-content:space-between;align-items:center;gap:10px}aside li a{display:block;padding:10px 0;min-height:44px;flex:1}
 aside h3{font-size:12px;font-weight:800;letter-spacing:.06em;margin:22px 0 6px;color:var(--mute)}aside h3:first-child{margin-top:12px}
 aside ul{list-style:none;margin:0;padding:0}aside li{padding:3px 0}aside a{color:var(--ink);text-decoration:none}aside a:hover,.card h3 a:hover{text-decoration:underline}aside .n{color:var(--mute);font-size:12px}
-.pf b{display:block;font-size:15px}.pf span{color:var(--mute)}
-@media(min-width:900px){.w{max-width:1040px}.g{display:grid;grid-template-columns:minmax(0,1fr) 250px;gap:56px}aside{margin-top:0;border-top:0;padding-top:0;position:sticky;top:20px;align-self:start}.sq{max-width:260px;margin:14px 0 14px auto}}
+.pf b{display:block;font-size:16px}.pf span{color:var(--mute)}
+@media(min-width:900px){header p{display:block}.w{max-width:1040px}.g{display:grid;grid-template-columns:minmax(0,1fr) 250px;gap:56px}nav{display:flex}.bt,#bd,.dh button{display:none!important}.bar{margin-left:0}header{padding-bottom:0}aside{position:sticky;top:20px;align-self:start;transform:none;visibility:visible;width:auto;overflow:visible;padding:6px 0 0;border:0;font-size:14px;z-index:1}aside li{display:block}aside li a{display:inline;padding:0;min-height:0}.dh{display:none}}
 main>h2{font-size:26px;line-height:1.35;font-weight:800;letter-spacing:-.03em;margin:.1em 0 .5em}
 ul.l{list-style:none;padding:0;margin:0}
 .card{display:grid;grid-template-columns:1fr 88px;gap:2px 14px;padding:16px 0;border-bottom:1px solid var(--line)}
@@ -75,12 +81,15 @@ blockquote{margin:1.2em 0;padding:0 16px;border-left:3px solid var(--acc);color:
 .sig{text-align:right;color:var(--mute);font-size:13px;border-top:1px solid var(--line);margin-top:40px;padding-top:12px}
 footer{margin-top:44px;color:var(--mute);font-size:12px}`;
 
-const JS = `const i=document.getElementById('q'),r=document.getElementById('sr');let d;
+const JS = `const i=document.getElementById('q'),r=document.getElementById('sr'),dr=document.getElementById('dr'),bd=document.getElementById('bd'),mb=document.getElementById('mb');let d;
 i.oninput=async()=>{const q=i.value.trim().toLowerCase();if(!q){r.style.display='none';return}d??=await(await fetch('${BASE}/search.json')).json();
-const h=d.filter(p=>(p.t+' '+p.x).toLowerCase().includes(q)).slice(0,8);r.innerHTML=h.map(p=>'<li><a href="${BASE}/posts/'+p.s+'/">'+p.t.replace(/</g,'&lt;')+'</a></li>').join('')||'<li><a>검색 결과가 없어요</a></li>';r.style.display='block'}`;
+const h=d.filter(p=>(p.t+' '+p.x).toLowerCase().includes(q)).slice(0,8);r.innerHTML=h.map(p=>'<li><a href="${BASE}/posts/'+p.s+'/">'+p.t.replace(/</g,'&lt;')+'</a></li>').join('')||'<li><a>검색 결과가 없어요</a></li>';r.style.display='block'};
+const set=o=>{dr.classList.toggle('open',o);bd.classList.toggle('open',o);document.body.classList.toggle('lock',o);mb.setAttribute('aria-expanded',o);(o?dr.querySelector('button'):mb).focus()};
+mb.onclick=()=>set(!dr.classList.contains('open'));bd.onclick=dr.querySelector('button').onclick=()=>set(false);
+addEventListener('keydown',e=>{if(e.key==='Escape'&&dr.classList.contains('open'))set(false)});dr.onclick=e=>{if(e.target.closest('li a[href]'))set(false)}`;
 
-const layout = (title, body, on = '', desc = SITE) => `<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${esc(title)}</title><meta name="description" content="${esc(desc)}"><style>${CSS}</style></head><body><div class="w"><header><div class="hd"><h1><a href="${BASE}/">${SITE}</a></h1><p>비서가 쓰고, 그누가 읽어요</p><nav>${Object.entries(FOLDERS).map(([n, s]) => `<a href="${BASE}/f/${s}/"${on === s ? ' class="on"' : ''}>${n}</a>`).join('')}<a href="${BASE}/p/about-biseo/"${on === 'about-biseo' ? ' class="on"' : ''}>비서 소개</a></nav><div class="sq"><input id="q" type="search" placeholder="글 검색" autocomplete="off"><ul id="sr"></ul></div></div></header><div class="g"><main>${body}</main>${side(on)}</div><footer>이 블로그는 AI 비서가 씁니다</footer></div><script>${JS}</script></body></html>`;
-const side = (on) => `<aside><div class="pf"><h3>프로필</h3><b>그누네 AI 비서</b><span>그누가 만들고 공부한 것을 비서가 대신 적어요.</span> <a href="${BASE}/p/about-biseo/">비서 소개</a></div><h3>카테고리</h3><ul>${Object.entries(FOLDERS).map(([n, s]) => `<li><a href="${BASE}/f/${s}/"${on === s ? ' style="font-weight:700"' : ''}>${n}</a> <span class="n">${posts.filter((p) => p.folder === n).length}</span></li>`).join('')}</ul><h3>최근 글</h3><ul>${posts.slice(0, 5).map((p) => `<li><a href="${BASE}/posts/${p.slug}/">${esc(p.title)}</a></li>`).join('')}</ul><h3>더 보기</h3><ul>${pages.map((p) => `<li><a href="${BASE}/p/${p.slug}/">${esc(p.title)}</a></li>`).join('')}</ul></aside>`;
+const layout = (title, body, on = '', desc = SITE) => `<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${esc(title)}</title><meta name="description" content="${esc(desc)}"><style>${CSS}</style></head><body><div class="w"><header><div class="hd"><div class="bar"><button class="bt" id="mb" aria-label="메뉴 열기" aria-expanded="false" aria-controls="dr"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button><h1><a href="${BASE}/">${SITE}</a></h1></div><p>비서가 쓰고, 그누가 읽어요</p><nav>${Object.entries(FOLDERS).map(([n, s]) => `<a href="${BASE}/f/${s}/"${on === s ? ' class="on"' : ''}>${n}</a>`).join('')}<a href="${BASE}/p/about-biseo/"${on === 'about-biseo' ? ' class="on"' : ''}>비서 소개</a></nav></div></header><div class="g"><main>${body}</main>${side(on)}</div><footer>이 블로그는 AI 비서가 씁니다</footer></div><div id="bd"></div><script>${JS}</script></body></html>`;
+const side = (on) => `<aside id="dr" aria-label="사이드바"><div class="dh"><span>메뉴</span><button class="bt" aria-label="메뉴 닫기"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div><div class="sq"><input id="q" type="search" placeholder="글 검색" autocomplete="off"><ul id="sr"></ul></div><div class="pf"><h3>프로필</h3><b>그누네 AI 비서</b><span>그누가 만들고 공부한 것을 비서가 대신 적어요.</span> <a href="${BASE}/p/about-biseo/">비서 소개</a></div><h3>카테고리</h3><ul>${Object.entries(FOLDERS).map(([n, s]) => `<li><a href="${BASE}/f/${s}/"${on === s ? ' style="font-weight:700"' : ''}>${n}</a> <span class="n">${posts.filter((p) => p.folder === n).length}</span></li>`).join('')}</ul><h3>최근 글</h3><ul>${posts.slice(0, 5).map((p) => `<li><a href="${BASE}/posts/${p.slug}/">${esc(p.title)}</a></li>`).join('')}</ul><h3>더 보기</h3><ul>${pages.map((p) => `<li><a href="${BASE}/p/${p.slug}/">${esc(p.title)}</a></li>`).join('')}</ul></aside>`;
 const list = (ps) => `<ul class="l">${ps.map((p) => `<li class="card"><div><h3><a href="${BASE}/posts/${p.slug}/">${esc(p.title)}</a></h3><p>${esc(p.sum)}</p><div class="m"><b>${p.folder}</b> / ${p.date}</div></div>${p.img ? `<img class="th" src="${p.img}" alt="" loading="lazy">` : `<div class="th">${p.folder}</div>`}</li>`).join('') || '<li>아직 글이 없어요</li>'}</ul>`;
 const out = (path, html) => { mkdirSync(`${OUT}/${path}`, { recursive: true }); writeFileSync(`${OUT}/${path}/index.html`, html); };
 
