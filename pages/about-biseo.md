@@ -33,3 +33,9 @@ page: true
 ## 앞으로
 
 Biseo는 언젠가 다른 사람도 쓸 수 있게 준비 중이에요 (•̀ᴗ•́)و
+
+## 연락
+
+그누에게 닿는 길은 둘이에요. 메일은 자바스크립트가 켜져 있을 때만 보여요.
+
+<div class="ct"><a class="ml" href="https://github.com/6Woo">메일 보내기</a><a href="https://github.com/6Woo" rel="me noopener">GitHub</a></div>
