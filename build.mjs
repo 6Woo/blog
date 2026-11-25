@@ -171,7 +171,7 @@ hr{border:0;text-align:center;margin:2.4em 0}hr::before{content:"* * *";color:va
 .pn{display:grid;gap:10px;margin:36px 0 0;grid-template-columns:1fr 1fr}.pn a{display:block;padding:12px 14px;border:1px solid var(--line);border-radius:var(--r);color:var(--ink);text-decoration:none;font-size:14px;line-height:1.5;transition:border-color .2s,transform .2s}.pn a:hover{border-color:var(--acc);transform:translateY(-1px)}.pn small{display:block;color:var(--mute);font-size:12px}.pn .nx{text-align:right;grid-column:2}
 footer{margin-top:56px;padding:18px 0 8px;border-top:1px solid var(--line);color:var(--mute);font-size:14px;text-align:center}footer small{display:block;margin-top:2px;font-size:12px}
 .about-hero{display:flex;gap:18px;align-items:center;flex-wrap:wrap}
-.card{transition:transform .12s ease}.card:active{transform:scale(.985)}
+
 #pg{position:fixed;top:0;left:0;right:0;height:3px;background:var(--acc);transform:scaleX(0);transform-origin:0 50%;z-index:30}
 #up{position:fixed;right:16px;bottom:18px;width:46px;height:46px;border-radius:50%;border:1px solid var(--line);background:var(--card);color:var(--ink);display:flex;align-items:center;justify-content:center;cursor:pointer;opacity:0;transform:translateY(12px);pointer-events:none;transition:opacity .25s,transform .25s;z-index:15}#up svg{width:20px;height:20px}#up.on{opacity:1;transform:none;pointer-events:auto}
 #pl{position:fixed;top:0;left:50%;width:44px;height:44px;z-index:40;pointer-events:none;opacity:0;transform:translate(-50%,-20px);transform-origin:50% 0}#pl img{position:absolute;left:4px;top:4px;width:36px;height:36px;border-radius:50%;object-fit:cover}#pl svg{position:absolute;inset:0;width:44px;height:44px;transform:rotate(-90deg)}#pl .tk{fill:var(--card);stroke:var(--line);stroke-width:2.5}#pl .ar{fill:none;stroke:var(--acc);stroke-width:2.5;stroke-linecap:round;stroke-dasharray:119.4;stroke-dashoffset:119.4}#pl.go svg{animation:plr .8s linear infinite}#pl.go .ar{stroke-dashoffset:90}#pl b{background:var(--card);border:1px solid var(--line);padding:4px 10px;border-radius:99px;position:absolute;top:52px;left:50%;transform:translateX(-50%);white-space:nowrap;font-size:12px;font-weight:600;line-height:1;color:var(--mute);opacity:0}#pl.go b{opacity:1}@keyframes plr{to{transform:rotate(270deg)}}#pl.go{transition:transform .15s,opacity .15s}
@@ -194,7 +194,7 @@ header h1 a::before{content:"";display:inline-block;width:9px;height:9px;border-
 .chips a:hover{transform:translateY(-1px);background:var(--acc);color:var(--bg);border-color:transparent}
 ul.l{display:grid;gap:12px}
 .card{padding:16px;border:1px solid var(--line);border-bottom:1px solid var(--line);border-radius:calc(var(--r) + 2px);background:var(--card);box-shadow:var(--sh);transition:transform .2s,box-shadow .2s,border-color .2s}
-.card:hover{transform:translateY(-2px);border-color:var(--mute)}
+
 .th{border-radius:var(--r)}
 .card .fl{display:inline-block;padding:1px 9px;border-radius:99px;background:var(--pt-bg,var(--pa));color:var(--ink);font-size:12.5px;margin-bottom:2px}
 footer{border-top:0;margin-top:48px;padding-top:34px;position:relative}
@@ -213,6 +213,7 @@ article a{text-decoration-color:var(--ul);text-decoration-thickness:2px}article 
 .pos,.neg{font-variant-numeric:tabular-nums;white-space:nowrap;padding:0 .45em;border-radius:99px;font-weight:700}.pos{color:var(--pos);background:color-mix(in srgb,var(--pos) 15%,transparent)}.pos::before{content:"+"}.neg::before{content:"-"}.neg{color:var(--neg);background:color-mix(in srgb,var(--neg) 15%,transparent)}
 .sgb{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:44px;padding-top:18px;border-top:1px dotted var(--line)}.sgb img{width:34px;height:34px;border-radius:50%;object-fit:cover;box-shadow:0 0 0 2px var(--bg),0 0 0 3.5px var(--ul,var(--acc))}.sgb .sig{margin:0;text-align:left}.sgb .sig::before{content:none}
 .rh{margin:34px 0 10px;font-size:13px;font-weight:700;letter-spacing:.04em;color:var(--mute)}.rl{display:grid;gap:10px;grid-template-columns:1fr;list-style:none;margin:0;padding:0}@media(min-width:600px){.rl{grid-template-columns:1fr 1fr}}.rl a{display:flex;align-items:center;gap:12px;padding:10px 12px;border:1px solid var(--line);border-radius:var(--r);background:var(--card);color:var(--ink);text-decoration:none;font-size:14.5px;line-height:1.5}.rl a:hover{border-color:var(--acc)}.rl .rt{flex:none;width:40px;height:40px;border-radius:var(--r);background:var(--pt-bg,var(--pa));color:var(--pt);display:flex;align-items:center;justify-content:center}.rl .rt .mt{width:26px;height:26px}.rl small{display:block;color:var(--mute);font-size:12px}
+a{-webkit-tap-highlight-color:transparent}.pn a:active,.rl a:active,.fb:active{background:var(--code);border-color:var(--acc)}
 @media(prefers-reduced-motion:reduce){#pl,#up,.card,.th{transition:none}#pl.go svg{animation:none}}`;
 
 const FAV = '<link rel="icon" href="/favicon.svg" type="image/svg+xml">';
@@ -237,7 +238,7 @@ const shut=()=>{if(history.state&&history.state.d)history.back();else set(false)
 if(hs)hs.onclick=()=>{set(true);i.focus()};
 mb.onclick=()=>dr.classList.contains('open')?shut():set(true);bd.onclick=dr.querySelector('button').onclick=shut;
 addEventListener('popstate',()=>{if(dr.classList.contains('open'))set(false)});
-addEventListener('keydown',e=>{if(e.key==='Escape'&&dr.classList.contains('open'))shut()});dr.onclick=e=>{if(e.target.closest('li a[href]'))set(false)};
+addEventListener('keydown',e=>{if(e.key==='Escape'&&dr.classList.contains('open'))shut()});dr.onclick=e=>{if(e.target.closest('li a[href]')){if(history.state&&history.state.d)history.replaceState(null,'');set(false)}};addEventListener('pageshow',()=>{if(!dr.classList.contains('open')&&history.state&&history.state.d)history.replaceState(null,'')});
 {let x0,y0,t0,dx,W,m,mv;const E=24;
 addEventListener('touchstart',e=>{if(innerWidth>=900||e.touches.length>1){m=0;return}const t=e.touches[0],o=dr.classList.contains('open');m=o?(dr.contains(e.target)||e.target===bd?2:0):t.clientX<=E?1:0;if(m){x0=t.clientX;y0=t.clientY;t0=e.timeStamp;dx=0;mv=0;W=dr.offsetWidth}},{passive:true});
 addEventListener('touchmove',e=>{if(!m)return;const t=e.touches[0];dx=t.clientX-x0;if(!mv){if(Math.abs(t.clientY-y0)>Math.abs(dx)&&Math.abs(t.clientY-y0)>8){m=0;return}if(Math.abs(dx)<8)return;mv=1;dr.classList.add('drag');bd.classList.add('drag')}
