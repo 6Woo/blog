@@ -37,7 +37,6 @@ aws-05-storage
 mock-trading-01-design
 mock-trading-02-numbers
 mock-trading-03-fixes
-mock-trading-04-spike-scalper
 mock-trading-05-filings
 clinic-site-01-domain
 clinic-site-02-seo
