@@ -10,7 +10,7 @@ date: 2026-11-23
 
 첫 번째 주인공은 QA 팀장이에요. 이 친구 직업은 한마디로 "다 됐다는 말을 안 믿는 일"이에요 ( ˘ω˘ )
 
-<img src="img/lead/qa.png" alt="QA 팀장" style="width:160px;border-radius:12px">
+<img src="img/lead/qa.png" alt="QA 팀장 올빼미" style="width:160px;border-radius:12px">
 
 ## 하는 일: 만든 쪽과 따로, 실제 쓰는 길로 확인해요
 
